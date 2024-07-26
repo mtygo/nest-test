@@ -6,9 +6,10 @@ import { APP_GUARD } from '@nestjs/core';
 import { LoginGuard } from 'src/login.guard';
 import { UserModule } from './user/user.module';
 import { DbModule } from './db/db.module';
+import { BookModule } from './book/book.module';
 
 @Module({
-  imports: [PersonModule, UserModule, DbModule],
+  imports: [PersonModule, UserModule, DbModule, BookModule],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: LoginGuard }],
 })
