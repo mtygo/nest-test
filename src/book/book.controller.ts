@@ -24,8 +24,8 @@ export class BookController {
   constructor(private readonly bookService: BookService) {}
 
   @Get('list')
-  async list() {
-    return this.bookService.list();
+  async list(@Query('key') key: string) {
+    return this.bookService.list(key);
   }
 
   @Get('detail')
@@ -58,7 +58,7 @@ export class BookController {
       },
       fileFilter: (req, file, cb) => {
         const extname = path.extname(file.originalname);
-        if (['.png', '.jpg', '.gif'].includes(extname)) {
+        if (['.png', '.jpg', '.gif', '.jpeg'].includes(extname)) {
           cb(null, true);
         } else {
           cb(new BadRequestException('只能上传图片'), false);

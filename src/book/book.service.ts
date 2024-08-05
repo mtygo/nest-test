@@ -10,8 +10,16 @@ export class BookService {
   @Inject()
   dbService: DbService;
 
-  async list() {
+  async list(key: string) {
     const books: Book[] = await this.dbService.read();
+    if (key) {
+      return books.filter(
+        (item) =>
+          item.name.includes(key) ||
+          item.author.includes(key) ||
+          item.description.includes(key),
+      );
+    }
     return books;
   }
 
