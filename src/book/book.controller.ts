@@ -68,6 +68,6 @@ export class BookController {
   )
   uploadFile(@UploadedFile() file: Express.Multer.File) {
     console.log(file);
-    return file.path;
+    return file?.path;
   }
 }
