@@ -37,7 +37,7 @@ export class JwtUserService {
       return '注册成功';
     } catch (e) {
       this.logger.error(e, JwtUserService);
-      return '注册失败';
+      return '注册失败 ';
     }
   }
 
