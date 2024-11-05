@@ -12,6 +12,7 @@ import config from 'config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtUserModule } from './jwt-user/jwt-user.module';
 import { JwtUser } from './jwt-user/entities/jwt-user.entity';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -50,8 +51,16 @@ import { JwtUser } from './jwt-user/entities/jwt-user.entity';
       },
       inject: [ConfigService],
     }),
+    JwtModule.register({
+      global: true,
+      secret: 'fcc',
+      signOptions: { expiresIn: '7d' },
+    }),
   ],
   controllers: [AppController],
-  providers: [AppService, { provide: APP_GUARD, useClass: LoginGuard }],
+  providers: [
+    AppService,
+    //  { provide: APP_GUARD, useClass: LoginGuard }
+  ],
 })
 export class AppModule {}
